@@ -8,7 +8,6 @@ const TOKEN_EXPIRES_IN = "24h";
 // const JWT_SECRET = "your_jwt_secret_here";
 const JWT_SECRET = process.env.JWT_SECRET;
 
-
 //REGISTER
 export async function register(req, res) {
   try {
@@ -65,47 +64,48 @@ export async function register(req, res) {
   }
 }
 
-
 //login
 
-export async function login(req, res){
-    try{
-        const {email, password} = req.body;
+export async function login(req, res) {
+  try {
+    const { email, password } = req.body;
 
-        if(!email || !password){
-            return res.status(400).json({
-                success: false,
-                message: 'All fields are required.'
-            })
-        }
-
-        const user = await User.findOne({ email });
-        if(!user) return res.status(401).json({
-            success: false,
-            message: 'Invalid email or password'
-        });
-
-        const isMatch = await bcrypt.compare(password, user.password);
-        if(!isMatch) return res.status(401).json({
-            success: false,
-            message: 'Invalid email or password'
-        });
-
-        const token = jwt.sign({ id: user._id.toString()}, JWT_SECRET, {expiresIn: TOKEN_EXPIRES_IN});
-
-        return res.status(201).json({
-            success: true,
-            message: 'Login successfully',
-            token,
-            user: {id: user._id.toString(), name: user.name, email: user.email}
-        });
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "All fields are required.",
+      });
     }
 
-    catch (err){
-        console.error('Login error:',err);
-        return res.status(500).json({
-            succes: false,
-            message: 'Server error'
-        });
-    }
+    const user = await User.findOne({ email });
+    if (!user)
+      return res.status(401).json({
+        success: false,
+        message: "Invalid email or password",
+      });
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch)
+      return res.status(401).json({
+        success: false,
+        message: "Invalid email or password",
+      });
+
+    const token = jwt.sign({ id: user._id.toString() }, JWT_SECRET, {
+      expiresIn: TOKEN_EXPIRES_IN,
+    });
+
+    return res.status(201).json({
+      success: true,
+      message: "Login successfully",
+      token,
+      user: { id: user._id.toString(), name: user.name, email: user.email },
+    });
+  } catch (err) {
+    console.error("Login error:", err);
+    return res.status(500).json({
+      succes: false,
+      message: "Server error",
+    });
+  }
 }

@@ -101,19 +101,12 @@
 
 }
 
-
-
-
-/* ===============================
-   MOBILE LOGO CENTER FIX
-   =============================== */
 @media (max-width: 768px) {
   .navbar {
     position: relative;
     justify-content: center;
   }
 
-  /* Center logo absolutely */
   .navbar-logo {
     position: absolute;
     left: 50%;
@@ -121,12 +114,10 @@
     margin-left: 0;
   }
 
-  /* Hide title on mobile to avoid overlap */
   .navbar-title {
     display: none;
   }
 
-  /* Keep hamburger on right */
   .hamburger {
     position: absolute;
     right: 20px;

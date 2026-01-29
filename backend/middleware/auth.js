@@ -18,7 +18,6 @@ export default async function authMiddleware(req, res, next) {
   //verify
   try {
     const payload = jwt.verify(token, JWT_SECRET);
-    // const user = await User.findById(payload.id).select('password');
     const user = await User.findById(payload.id);
 
     if (!user) {
@@ -27,7 +26,6 @@ export default async function authMiddleware(req, res, next) {
         message: "User not found",
       });
     }
-    // req.user = user;
     req.user = {
       _id: user._id,
       id: user._id.toString(),

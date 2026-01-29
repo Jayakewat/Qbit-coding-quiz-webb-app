@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Signup.css";
 
-const Signup = ({onSignupSuccess}) => {
+const Signup = ({ onSignupSuccess }) => {
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -14,7 +14,9 @@ const Signup = ({onSignupSuccess}) => {
   const [loading, setLoading] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
-  const API_BASE = "http://localhost:4000";
+  // const API_BASE = "http://localhost:4000";
+  const API_BASE = import.meta.env.VITE_API_BASE;
+
 
   const validate = () => {
     const e = {};
@@ -56,31 +58,31 @@ const Signup = ({onSignupSuccess}) => {
         return;
       }
 
-      if(data?.token){
-        try{
-            localStorage.setItem("authToken", data.token);
-            localStorage.setItem(
-                "currentUser",
-                JSON.stringify(
-                    data.user || {
-                        name: name.trim(),
-                        email: email.trim().toLowerCase(),
-                    }
-                )
-            );
-        } catch (err){
-            //ignore all the error
+      if (data?.token) {
+        try {
+          localStorage.setItem("authToken", data.token);
+          localStorage.setItem(
+            "currentUser",
+            JSON.stringify(
+              data.user || {
+                name: name.trim(),
+                email: email.trim().toLowerCase(),
+              }
+            )
+          );
+        } catch (err) {
+          //ignore all the error
         }
       }
-      if(typeof onSignupSuccess === "function"){
-        try{
-            onSignupSuccess(
-                data.user || {
-                    name: name.trim(),
-                    email: email.trim().toLowerCase(),
-                }
-            );
-        } catch(err){
+      if (typeof onSignupSuccess === "function") {
+        try {
+          onSignupSuccess(
+            data.user || {
+              name: name.trim(),
+              email: email.trim().toLowerCase(),
+            }
+          );
+        } catch (err) {
 
         }
       }

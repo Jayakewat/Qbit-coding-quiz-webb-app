@@ -24,19 +24,6 @@ export async function createResult(req, res) {
       });
     }
 
-    //compute wrong if not provided
-    // const computedWrong =
-    //   wrong !== undefined
-    //     ? Number(wrong)
-    //     : Math.max(0, Number(totalQuestions) - Number(correct));
-
-    // if (!title) {
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: "Missing title",
-    //   });
-    // }
-
     const tq = Number(totalQuestions);
     const corr = Number(correct);
 
@@ -60,21 +47,12 @@ export async function createResult(req, res) {
 
     const payload = {
       title: String(title).trim(),
-      // technology: technology.toLowerCase(),
-      // technology: String(technology).toLowerCase(),
-      // level,
-
       technology: normalizedTechnology,
       level: String(level).toLowerCase(),
-      // totalQuestions: Number(totalQuestions),
-      // correct: Number(correct),
-
       totalQuestions: tq,
       correct: corr,
-
-      // wrong: computedWrong,
       wrong: Number(wrong) || Math.max(0, tq - corr),
-      user: req.user._id, // for a perticular user
+      user: req.user._id,
     };
 
     const created = await Result.create(payload);
@@ -112,9 +90,6 @@ export async function listResults(req, res) {
     }
 
     const items = await Result.find(query).sort({ createdAt: -1 }).lean();
-    // const items = await Result.find({ user: req.user.id })
-    //   .sort({ createdAt: -1 })
-    //   .lean();
 
     return res.json({
       success: true,

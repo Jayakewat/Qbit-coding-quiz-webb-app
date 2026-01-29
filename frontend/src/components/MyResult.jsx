@@ -13,7 +13,9 @@ const Badge = ({ percent }) => {
   return <span className="badge-needswork">Needs Work</span>;
 };
 
-const MyResult = ({ apiBase = "http://localhost:4000" }) => {
+// const MyResult = ({ apiBase = "http://localhost:4000" }) => {
+const MyResult = () => {
+  const apiBase = import.meta.env.VITE_API_BASE;
 
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -22,12 +24,10 @@ const MyResult = ({ apiBase = "http://localhost:4000" }) => {
   const [technologies, setTechnologies] = useState([]);
 
   const getAuthHeader = useCallback(() => {
-    const token =
-      localStorage.getItem("token") ||
-      localStorage.getItem("authToken") ||
-      null;
+    const token = localStorage.getItem("authToken");
     return token ? { Authorization: `Bearer ${token}` } : {};
   }, []);
+
 
 
   // Effect: Fetch results when component mounts or when selectedTechnology changes
@@ -87,7 +87,7 @@ const MyResult = ({ apiBase = "http://localhost:4000" }) => {
   }, [apiBase, selectedTechnology, getAuthHeader]);
 
 
- 
+
   useEffect(() => {
     let mounted = true;
     const fetchAllForTechList = async () => {
@@ -140,7 +140,7 @@ const MyResult = ({ apiBase = "http://localhost:4000" }) => {
     return { totalQs, totalCorrect, totalWrong, pct };
   }, [results]);
 
-  // Group results by the first word of the title (used as "track")
+  // Group results by the first word of the title 
   const grouped = useMemo(() => {
     const src = Array.isArray(results) ? results : [];
     const map = {};
@@ -272,7 +272,7 @@ function StripCard({ item }) {
 
   const level = getLevel(item);
 
-  return(
+  return (
     <article className="card">
       <div className="card-accent"></div>
       <div className="card-content">
@@ -286,7 +286,7 @@ function StripCard({ item }) {
               <h3 className="card-title">{item.title}</h3>
 
               <div className="card-meta">
-                {item.totalQuestions} Qs 
+                {item.totalQuestions} Qs
                 {item.timeSpent ? ` • ${item.timeSpent}` : ""}
               </div>
             </div>
@@ -322,4 +322,4 @@ function StripCard({ item }) {
     </article>
   )
 }
-  export default MyResult;
+export default MyResult;
