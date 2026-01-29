@@ -7,7 +7,11 @@ import { CheckCircle, XCircle, Menu } from "lucide-react"
 import './Sidebar.css';
 import questionsData from "../assets/dummyData"
 
-const API_BASE = "http://localhost:4000";
+// const API_BASE = "http://localhost:4000";
+const API_BASE =
+    import.meta.env.VITE_API_BASE ||
+    "https://qbit-coding-quiz-webb-app.onrender.com";
+
 
 const Sidebar = () => {
     const [selectedTech, setSelectedTech] = useState(null);

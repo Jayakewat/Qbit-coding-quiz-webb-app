@@ -15,7 +15,10 @@ const Badge = ({ percent }) => {
 
 // const MyResult = ({ apiBase = "http://localhost:4000" }) => {
 const MyResult = () => {
-  const apiBase = import.meta.env.VITE_API_BASE;
+  // const apiBase = import.meta.env.VITE_API_BASE;
+  const apiBase =
+    import.meta.env.VITE_API_BASE ||
+    "https://qbit-coding-quiz-webb-app.onrender.com";
 
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -24,8 +27,14 @@ const MyResult = () => {
   const [technologies, setTechnologies] = useState([]);
 
   const getAuthHeader = useCallback(() => {
-    const token = localStorage.getItem("authToken");
-    return token ? { Authorization: `Bearer ${token}` } : {};
+    const token =
+      // localStorage.getItem("token") ||
+      localStorage.getItem("authToken");
+    // ||
+    // null;
+    // if (!token) return null;
+
+    return token ? { Authorization: `Bearer ${token}` } : null;
   }, []);
 
 
@@ -43,7 +52,8 @@ const MyResult = () => {
             : "";
 
         const authHeader = getAuthHeader();
-        if (!authHeader.Authorization) {
+        // if (!authHeader.Authorization) {
+        if (!authHeader) {
           setError("Please login to view results.");
           setLoading(false);
           return;
@@ -51,7 +61,11 @@ const MyResult = () => {
 
 
         const res = await axios.get(`${apiBase}/api/results${q}`, {
-          headers: { "Content-Type": "application/json", ...getAuthHeader() },
+          // headers: { "Content-Type": "application/json", ...getAuthHeader() },
+          headers: {
+            "Content-Type": "application/json",
+            ...authHeader,
+          },
           timeout: 10000,
         });
         if (!mounted) return;
@@ -90,10 +104,18 @@ const MyResult = () => {
 
   useEffect(() => {
     let mounted = true;
+
+    const authHeader = getAuthHeader();
+    if (!authHeader.Authorization) return;
+
     const fetchAllForTechList = async () => {
       try {
         const res = await axios.get(`${apiBase}/api/results`, {
-          headers: { "Content-Type": "application/json", ...getAuthHeader() },
+          // headers: { "Content-Type": "application/json", ...getAuthHeader() },
+          headers: {
+            "Content-Type": "application/json",
+            ...authHeader,
+          },
           timeout: 10000,
         });
         if (!mounted) return;
