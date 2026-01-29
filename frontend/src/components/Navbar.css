@@ -1,0 +1,135 @@
+.navbar {
+  position: sticky;    
+  top: 0;                
+  z-index: 1200;       
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: #c2e9d0;
+  padding: 0 16px;
+  height: 64px;
+}
+
+
+/* Logo */
+.navbar-logo img {
+  width: 70px;
+}
+
+/* Title */
+.navbar-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1b4332;
+  text-align: center;
+  flex: 1;
+}
+
+/* Desktop buttons */
+.navbar-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* Button style */
+.nav-btn {
+  background-color: #52b788;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.nav-btn:hover {
+  background-color: #40916c;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.mobile-menu {
+  position: absolute;
+  top: 64px;
+  right: 16px;
+  background-color: #e9f7ef;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 150px;
+}
+
+.mobile-link {
+  background-color: #52b788;
+  color: white;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 600;
+  border: none;
+}
+
+.mobile-link:hover {
+  background-color: #40916c;
+}
+
+@media (max-width: 768px) {
+  .navbar-title {
+    display: none;
+  }
+
+  .navbar-buttons {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+}
+
+
+
+
+/* ===============================
+   MOBILE LOGO CENTER FIX
+   =============================== */
+@media (max-width: 768px) {
+  .navbar {
+    position: relative;
+    justify-content: center;
+  }
+
+  /* Center logo absolutely */
+  .navbar-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 0;
+  }
+
+  /* Hide title on mobile to avoid overlap */
+  .navbar-title {
+    display: none;
+  }
+
+  /* Keep hamburger on right */
+  .hamburger {
+    position: absolute;
+    right: 20px;
+    display: block;
+  }
+}

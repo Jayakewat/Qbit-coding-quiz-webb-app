@@ -1,0 +1,283 @@
+.page-container {
+  min-height: 100vh;
+  background: #f6f8fc;
+  padding: 24px 0;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.filter-container {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 28px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+}
+
+.filter-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.filter-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  margin-right: 6px;
+}
+
+.filter-button {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #374151;
+  transition: all 0.2s ease;
+}
+
+.filter-button:hover {
+  background: #f3f4f6;
+}
+
+.filter-button-active {
+  background: #4f46e5;
+  color: #ffffff;
+  border-color: #4f46e5;
+}
+
+.filter-status {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.track-section {
+  margin-bottom: 32px;
+}
+
+.track-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 16px;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+.card-accent {
+  width: 4px;
+  background: #4f46e5;
+}
+
+.card-content {
+  padding: 16px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.card-info {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.level-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #e0e7ff;
+  color: #4338ca;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.card-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.card-meta {
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.card-performance {
+  text-align: right;
+}
+
+.performance-label {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.badge-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.badge-excellent,
+.badge-good,
+.badge-average,
+.badge-needswork {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-excellent {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge-good {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.badge-average {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.badge-needswork {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.cart-state {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 12px;
+}
+
+.stat-item {
+  font-size: 14px;
+  color: #374151;
+}
+
+.stat-number {
+  font-weight: 700;
+  margin-left: 4px;
+}
+
+.loading-container {
+  text-align: center;
+  padding: 60px 0;
+}
+
+.loading-text {
+  margin-top: 10px;
+  color: #6b7280;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 50px 0;
+  color: #6b7280;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 22px;
+  }
+
+  .filter-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .card-performance {
+    text-align: left;
+  }
+
+  .badge-container {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .level-avatar {
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
+  }
+
+  .card-title {
+    font-size: 15px;
+  }
+
+  .stat-item {
+    font-size: 13px;
+  }
+}
